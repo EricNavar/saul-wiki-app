@@ -1,24 +1,26 @@
 import React from "react";
-import {client} from './client';
 import {Article} from './Article';
+import styled from "styled-components";
 
-export function ArticleSection() {
-    const [articles, setArticles] = React.useState([]);
+const ArticleContainer = styled.div`
+    margin-left: 20%;
+    margin-right: 20%;
+    @media (max-width: 1080px) {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    @media (max-width: 600px) {
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+`;
 
-    React.useEffect(() => {
-        client.getEntries()
-            .then((response) => {
-                const articlesFromContentful = response.items.map(item => item.fields);
-                setArticles(articlesFromContentful);
-            })
-            .catch(console.error);
-    }, []);
-
+export function ArticleSection(props) {
     return (
-        <div>
-            {articles.map((article,index) =>
+        <ArticleContainer>
+            {props.articles.map((article,index) =>
                <Article {...article} key={index} />
             )}
-        </div>
+        </ArticleContainer>
     );
 }

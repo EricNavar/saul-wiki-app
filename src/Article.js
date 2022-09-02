@@ -1,30 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
+import {marked} from 'marked';
 
 const StyledArticle = styled.div`
     border-radius: 8px;
-    background-color: pink;
+    background-color: rgba(255,255,255,.85);
     padding: 30px;
     margin: 20px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 `;
 
 const StyledImage = styled.img`
-    border-radius: 8px;
-    max-width: 400px;
+    border-radius: 6px;
+    width: 400px;
+    max-width: 100%;
     margin-bottom: 16px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 `;
 
 const ArticleTitle = styled.h1`
     font-size: 2rem;
-`
+    margin-top: 0;
+`;
 
 export function Article(props) {
+    if (!props.description) {
+        console.log('post description is undefined');
+        return null;
+    }
+    const postDescription = marked.parse(props.description);
+
     return (
         <StyledArticle>
             <ArticleTitle>{props.name}</ArticleTitle>
-            <StyledImage src={props.featuredImage.fields.file.url} />
-            <div>{props.description}</div>
+            <div style={{textAlign: 'center'}}>
+                <StyledImage src={props.featuredImage.fields.file.url} />
+            </div>
+            <div dangerouslySetInnerHTML={{ __html: postDescription }}></div>
         </StyledArticle>
     );
 }
