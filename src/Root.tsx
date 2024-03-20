@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
 
 import { ArticlesPage } from './page-components/ArticlesPage';
-import { ArticlePage } from './page-components/ArticlePage';
+import { ArticleDetailsPage } from './page-components/ArticleDetailsPage';
 
 type ScrollToTopProps = {
   children: JSX.Element;
@@ -33,30 +33,24 @@ function ScrollToTop(props: ScrollToTopProps) {
 
 function Root(): JSX.Element {
   const Helper = (props: any) => {
-    return <ArticlePage subText={''} headerText={''} image={{
-        fields: {
-            file: {
-                url: ''
-            }
-        }
-    }} /*playlistId={props.match.params.id}*/ />;
+    return <ArticleDetailsPage id={props.match.params.id}/>;
   };
 
   return (
     <>
       <Router>
         <ScrollToTop>
-            <Switch>
+          <Switch>
             <Route path="/article/:id">
-                {Helper}
+              {Helper}
             </Route>
             <Route path="/">
-                <ArticlesPage />
+              <ArticlesPage />
             </Route>
             <Route path="*">
-                <Redirect to="/" />
+              <Redirect to="/" />
             </Route>
-            </Switch>
+          </Switch>
         </ScrollToTop>
       </Router>
     </>

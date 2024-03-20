@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Link } from 'react-router-dom';
+
 export const Container = styled.div`
   background-color: #FDD5D2;
   padding-bottom: 30px;
@@ -18,12 +20,13 @@ export const ArticleContainer = styled.div`
   }
 `;
 
-export const StyledArticle = styled.button`
+export const StyledArticle = styled(Link)`
     border-radius: 8px;
     background-color: rgba(255,255,255,.85);
     padding: 30px;
     margin: 20px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    display: block;
 `;
 
 export const StyledImage = styled.img`

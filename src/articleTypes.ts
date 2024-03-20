@@ -1,4 +1,5 @@
-export type ArticlePageProps = {
+export type ArticleProps = {
+    id: string;
     subText: string;
     headerText: string;
     image: {

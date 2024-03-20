@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ArticlePageProps } from '../articleTypes';
+import { ArticleProps } from '../articleTypes';
 import { client } from '../client';
 
 import '../App.css';
@@ -9,7 +9,7 @@ import { ArticleContainer, Container } from '../styles';
 import { ArticleCard } from '../kit-components/ArticleCard';
 
 const ArticlesPage: React.FC = () => {
-  const [articles, setArticles] = React.useState<ArticlePageProps[]>([]);
+  const [articles, setArticles] = React.useState<ArticleProps[]>([]);
   const [searchText, setSearchText] = React.useState<string>('');
 
   React.useEffect(() => {
@@ -17,7 +17,7 @@ const ArticlesPage: React.FC = () => {
       content_type: 'project'
     })
       .then((response) => {
-        const articlesFromContentful = response.items.map(item => item.fields) as ArticlePageProps[];
+        const articlesFromContentful = response.items.map(item => item.fields) as ArticleProps[];
         setArticles(articlesFromContentful);
       })
       .catch(console.error);
