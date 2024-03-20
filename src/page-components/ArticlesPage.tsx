@@ -17,7 +17,9 @@ const ArticlesPage: React.FC = () => {
       content_type: 'project'
     })
       .then((response) => {
-        const articlesFromContentful = response.items.map(item => item.fields) as ArticleProps[];
+        const articlesFromContentful = response.items.map(item => {
+          return {...item.fields, id: item.sys.id} as ArticleProps
+        });
         setArticles(articlesFromContentful);
       })
       .catch(console.error);
@@ -35,14 +37,16 @@ const ArticlesPage: React.FC = () => {
     <div className="App">
       <Container>
         <Header />
-        <input value={searchText} onChange={onChangeSearchText} />
-        <button onClick={onClickSearch}>search</button>
+        <form onSubmit={onClickSearch}>
+          <input value={searchText} onChange={onChangeSearchText} placeholder='Search for article'/>
+          <button onClick={onClickSearch}>search</button>
+        </form>
         <ArticleContainer>
           {articles ? 
             articles.map((article, index) =>
               <ArticleCard {...article} key={index} />
             )
-            : <p>No articles found</p>
+            : <p>Loading...</p>
           }
         </ArticleContainer>
       </Container>

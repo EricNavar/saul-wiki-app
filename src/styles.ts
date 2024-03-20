@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  background-color: #FDD5D2;
   padding-bottom: 30px;
+  background-image: url("https://preview.redd.it/lax3f16bthoc1.png?auto=webp&s=bbb839eaecd81291a8b3cf44c5282a212d86eaf3");
+  background-size:180px;
 `;
 
 export const ArticleContainer = styled.div`
@@ -46,13 +47,24 @@ export const HeaderInner = styled.div`
   padding: 16px;
   border-radius: 6px;
   background-color: rgba(255,255,255,.85);
-  text-align: center;
-  font-size: 1.5rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+`;
+  
+export const HeaderTitle = styled(Link)`
+  font-size: 1.5rem;
+  color: black;
 `;
 
 export const StyledHeader = styled.header`
   position: sticky;
   padding: 6px;
   top: 0;
+  margin-bottom: 26px;
+  padding-top: 12px;
+`;
+
+export const TextWrapper = styled.div`
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 `;
