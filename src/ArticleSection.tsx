@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { ArticleSectionProps } from './articleTypes';
 import { ArticleView } from './ArticleView';
+import { Header } from './Header';
 
 const ArticleContainer = styled.div`
   margin-left: 20%;
@@ -20,10 +21,13 @@ const ArticleContainer = styled.div`
 
 export const ArticleSection: React.FC<ArticleSectionProps> = (props) => {
   return (
-    <ArticleContainer>
-      {props.articles.map((article, index) =>
-        <ArticleView {...article} key={index} />
-      )}
-    </ArticleContainer>
+    <>
+      <Header />
+      <ArticleContainer>
+        {props.articles.map((article, index) =>
+          <ArticleView {...article} key={index} />
+        )}
+      </ArticleContainer>
+    </>
   );
 };
