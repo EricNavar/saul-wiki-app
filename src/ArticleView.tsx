@@ -1,6 +1,9 @@
 import React from 'react';
+
+import { marked } from 'marked';
 import styled from 'styled-components';
-import {marked} from 'marked';
+
+import { ArticleViewProps } from './articleTypes';
 
 const StyledArticle = styled.div`
     border-radius: 8px;
@@ -23,20 +26,20 @@ const ArticleTitle = styled.h1`
     margin-top: 0;
 `;
 
-export function Article(props) {
-    if (!props.description) {
-        console.log('post description is undefined');
-        return null;
+export const ArticleView: React.FC<ArticleViewProps> = (props) => {
+    if (!props.subText) {
+        console.error('post description is undefined');
+        return <div />;
     }
-    const postDescription = marked.parse(props.description);
+    const postDescription = marked.parse(props.subText) as string;
 
     return (
         <StyledArticle>
-            <ArticleTitle>{props.name}</ArticleTitle>
-            <div style={{textAlign: 'center'}}>
-                <StyledImage src={props.featuredImage.fields.file.url} />
+            <ArticleTitle>{props.headerText}</ArticleTitle>
+            <div style={{ textAlign: 'center' }}>
+                <StyledImage src={props.image.fields.file.url} />
             </div>
             <div dangerouslySetInnerHTML={{ __html: postDescription }}></div>
         </StyledArticle>
     );
-}
+};
