@@ -9,8 +9,8 @@ import {
   useHistory,
 } from 'react-router-dom';
 
-import { ArticlesPage } from './ArticlesPage';
-import { ArticleView } from './ArticleView';
+import { ArticlesPage } from './page-components/ArticlesPage';
+import { ArticlePage } from './page-components/ArticlePage';
 
 type ScrollToTopProps = {
   children: JSX.Element;
@@ -33,7 +33,7 @@ function ScrollToTop(props: ScrollToTopProps) {
 
 function Root(): JSX.Element {
   const Helper = (props: any) => {
-    return <ArticleView subText={''} headerText={''} image={{
+    return <ArticlePage subText={''} headerText={''} image={{
         fields: {
             file: {
                 url: ''

@@ -1,4 +1,4 @@
-export type ArticleViewProps = {
+export type ArticlePageProps = {
     subText: string;
     headerText: string;
     image: {
@@ -8,8 +8,4 @@ export type ArticleViewProps = {
           }
       }
     }
-}
-
-export type ArticleSectionProps = {
-    articles: ArticleViewProps[];
 }
