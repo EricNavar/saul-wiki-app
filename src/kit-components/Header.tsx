@@ -1,6 +1,5 @@
 import React from 'react';
-import { HeaderInner, HeaderTitle, StyledHeader } from '../styles';
-import { Link } from 'react-router-dom';
+import { HeaderInner, HeaderTitle, StyledHeader, Tag, TagsContainer } from '../styles';
 
 export const Header: React.FC = () => {
   return (
@@ -9,19 +8,20 @@ export const Header: React.FC = () => {
         <HeaderTitle to='/'>
           Better Call Saul Wiki
         </HeaderTitle>
-        &nbsp;
-        Tags:
-        <Link to='/?tag=seasons'>
-          Seasons
-        </Link>
-        &nbsp;
-        <Link to='/?tag=characters'>
-          Characters
-        </Link>
-        &nbsp;
-        <Link to='/?tag=locations'>
-          Locations
-        </Link>
+        <TagsContainer>
+          Tags:
+          <Tag to='/?tag=seasons'>
+            Seasons
+          </Tag>
+          &nbsp;
+          <Tag to='/?tag=characters'>
+            Characters
+          </Tag>
+          &nbsp;
+          <Tag to='/?tag=locations'>
+            Locations
+          </Tag>
+        </TagsContainer>
       </HeaderInner>
     </StyledHeader>
   );

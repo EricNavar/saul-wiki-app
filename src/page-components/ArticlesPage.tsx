@@ -7,14 +7,24 @@ import '../App.css';
 import { Header } from '../kit-components/Header';
 import { ArticleContainer, Container } from '../styles';
 import { ArticleCard } from '../kit-components/ArticleCard';
+import { useHistory } from 'react-router';
+
+// i hate my life
 
 const ArticlesPage: React.FC = () => {
   const [articles, setArticles] = React.useState<ArticleProps[]>([]);
   const [searchText, setSearchText] = React.useState<string>('');
 
+  const { push: navigateTo, location: {search} } = useHistory();
+  const searchParams = new URLSearchParams(search);
+  console.log(searchParams);
+
   React.useEffect(() => {
+    const tag = searchParams.get('tag')
+
     client.getEntries({
-      content_type: 'project'
+      content_type: 'project',
+      'metadata.tags.sys.id[in]': tag ? [tag] : undefined,
     })
       .then((response) => {
         const articlesFromContentful = response.items.map(item => {
@@ -25,12 +35,19 @@ const ArticlesPage: React.FC = () => {
       .catch(console.error);
   }, []);
 
+  // metadata.tags.sys.id[in]=coding
+  // metadata.tags.sys.id[in]=tagA,tagB
+
   const onChangeSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   }
 
-  const onClickSearch = () => {
-    console.log('search');
+  const onClickSearch = (e:any) => {
+    e.preventDefault();
+    searchText && navigateTo({
+      pathname: '/',
+      search: `?search=${searchText}`,
+    });
   }
 
   return (

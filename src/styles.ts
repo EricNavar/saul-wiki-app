@@ -46,7 +46,7 @@ export const ArticleTitle = styled.h1`
 export const HeaderInner = styled.div`
   padding: 16px;
   border-radius: 6px;
-  background-color: rgba(255,255,255,.85);
+  background-color: rgba(255,255,255);
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;
   
@@ -67,4 +67,16 @@ export const TextWrapper = styled.div`
   background-color: white;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+`;
+
+export const TagsContainer = styled.div`
+  float: right;
+`;
+
+export const Tag = styled(Link)`
+  background-color: #ccc;
+  border-radius: 4px;
+  color: black;
+  text-decoration: none;
+  padding: 3px;
 `;
