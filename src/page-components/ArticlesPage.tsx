@@ -15,16 +15,18 @@ const ArticlesPage: React.FC = () => {
   const [articles, setArticles] = React.useState<ArticleProps[]>([]);
   const [searchText, setSearchText] = React.useState<string>('');
 
-  const { push: navigateTo, location: {search} } = useHistory();
-  const searchParams = new URLSearchParams(search);
-  console.log(searchParams);
-
+  const { push: navigateTo, location } = useHistory();
+  // console.log(searchParams);
+  
   React.useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
     const tag = searchParams.get('tag')
+    const search = searchParams.get('search')
 
     client.getEntries({
       content_type: 'project',
       'metadata.tags.sys.id[in]': tag ? [tag] : undefined,
+      query: search ? search : undefined,
     })
       .then((response) => {
         const articlesFromContentful = response.items.map(item => {
@@ -33,10 +35,7 @@ const ArticlesPage: React.FC = () => {
         setArticles(articlesFromContentful);
       })
       .catch(console.error);
-  }, []);
-
-  // metadata.tags.sys.id[in]=coding
-  // metadata.tags.sys.id[in]=tagA,tagB
+  }, [location.search]);
 
   const onChangeSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);

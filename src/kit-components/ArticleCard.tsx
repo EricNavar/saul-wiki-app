@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { marked } from 'marked';
-
 import { ArticleProps } from '../articleTypes';
 import { ArticleTitle, StyledArticle, StyledImage } from '../styles';
 
