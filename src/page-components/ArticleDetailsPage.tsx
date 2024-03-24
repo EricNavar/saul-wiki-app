@@ -4,7 +4,7 @@ import {documentToHtmlString} from '@contentful/rich-text-html-renderer';
 
 import { Header } from '../kit-components/Header';
 import { ArticleProps } from '../articleTypes';
-import { ArticleTitle, Container, TextWrapper, StyledImage, ContentWrapper, Tag } from '../styles';
+import { ArticleTitle, Container, ContentWrapper, Tag } from '../styles';
 import { client } from '../client';
 
 export const ArticleDetailsPage: React.FC<{ id: string }> = (props) => {
@@ -33,9 +33,6 @@ export const ArticleDetailsPage: React.FC<{ id: string }> = (props) => {
       <ContentWrapper>
         <ArticleTitle>{article.title}</ArticleTitle>
         <Tag>{article.tag}</Tag>
-        <div style={{ textAlign: 'center' }}>
-          <StyledImage src={article.thumbnail.fields.file.url} />
-        </div>
         <div dangerouslySetInnerHTML={{ __html: postContent }}></div>
       </ContentWrapper>
     </Container>

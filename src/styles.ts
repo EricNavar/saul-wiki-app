@@ -111,3 +111,18 @@ export const SearchField = styled.input`
 export const NavigationContainer = styled.div`
   display: flex;
 `;
+
+export const PaginationContainer = styled.div`
+  justify-content: center;
+  display: flex;
+  flex-wrap: nowrap;
+`
+
+export const PaginationButton = styled.button`
+  margin:8px;
+  padding:8px;
+  background: white;
+  border-style: none;
+  border-radius:4px;
+  cursor:pointer;
+`;
