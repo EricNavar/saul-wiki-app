@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, HeaderInner, HeaderTitle, NavigationContainer, SearchField, StyledHeader,  TagButton, TagsContainer } from '../styles';
 import { useHistory } from 'react-router';
+import Logo from '../Better_Call_Saul_logo.png'
 
 export const Header: React.FC = () => {
   const [searchText, setSearchText] = React.useState<string>('');
@@ -17,13 +18,13 @@ export const Header: React.FC = () => {
       pathname: '/',
       search: `?search=${searchText}`,
     });
-  }
+  };
 
   return (
     <StyledHeader >
       <HeaderInner>
         <HeaderTitle to='/'>
-          Better Call Saul Wiki
+          <img src={Logo} alt='logo' height="80px"/>
         </HeaderTitle>
         <NavigationContainer>
           <Form onSubmit={onClickSearch}>
@@ -51,6 +52,12 @@ export const Header: React.FC = () => {
               search: '?tag=location',
             })}>
               Locations
+            </TagButton>
+            <TagButton onClick={()=>history.push({
+              pathname: '/',
+              search: '?tag=lore',
+            })}>
+              Lore
             </TagButton>
           </TagsContainer>
           </NavigationContainer>

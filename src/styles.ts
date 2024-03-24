@@ -6,6 +6,7 @@ export const Container = styled.div`
   padding-bottom: 30px;
   background-image: url("https://preview.redd.it/lax3f16bthoc1.png?auto=webp&s=bbb839eaecd81291a8b3cf44c5282a212d86eaf3");
   background-size:180px;
+  min-height: 100vh;
 `;
 
 export const ArticleContainer = styled.div`
