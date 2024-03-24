@@ -1,11 +1,12 @@
 import React from 'react';
 
-import {documentToHtmlString} from '@contentful/rich-text-html-renderer';
+// import {documentToHtmlString} from '@contentful/rich-text-react-renderer';
 
 import { Header } from '../kit-components/Header';
 import { ArticleProps } from '../articleTypes';
 import { ArticleTitle, Container, ContentWrapper, Tag } from '../styles';
 import { client } from '../client';
+import { renderContent } from '../util';
 
 export const ArticleDetailsPage: React.FC<{ id: string }> = (props) => {
   const [article, setArticle] = React.useState<ArticleProps>();
@@ -25,7 +26,7 @@ export const ArticleDetailsPage: React.FC<{ id: string }> = (props) => {
   if (!article) {
     return <div>Loading...</div>;
   }
-  const postContent = documentToHtmlString(article.content);
+  // const postContent = documentToHtmlString(article.content);
 
   return (
     <Container>
@@ -33,7 +34,7 @@ export const ArticleDetailsPage: React.FC<{ id: string }> = (props) => {
       <ContentWrapper>
         <ArticleTitle>{article.title}</ArticleTitle>
         <Tag>{article.tag}</Tag>
-        <div dangerouslySetInnerHTML={{ __html: postContent }}></div>
+        {renderContent(article.content)}
       </ContentWrapper>
     </Container>
   );

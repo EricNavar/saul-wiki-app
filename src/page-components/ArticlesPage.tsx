@@ -5,7 +5,7 @@ import { client } from '../client';
 
 import '../App.css';
 import { Header } from '../kit-components/Header';
-import { ArticleContainer, Container, PaginationButton, PaginationContainer, } from '../styles';
+import { ArticleContainer, Container, PaginationButton, PaginationContainer, TextWrapper, } from '../styles';
 import { ArticleCard } from '../kit-components/ArticleCard';
 import { useHistory, useLocation } from 'react-router';
 
@@ -50,7 +50,6 @@ const ArticlesPage: React.FC = () => {
   }, [page, search, tag]);
 
   const onClickPage = (page: number) => {
-    console.log(page);
     const newSearchParams = new URLSearchParams();
     tag && newSearchParams.append('tag', tag);
     search && newSearchParams.append('search', search);
@@ -74,6 +73,7 @@ const ArticlesPage: React.FC = () => {
           }
         </ArticleContainer>
         <PaginationContainer>
+          <TextWrapper>Pages</TextWrapper>
           {[...new Array(pageCount)].map((page, index) =>
             <PaginationButton key={index} id={`page-${index}`} onClick={() => onClickPage(index)}>{index}</PaginationButton>
             )}
