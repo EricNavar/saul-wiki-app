@@ -5,7 +5,7 @@ import { client } from '../client';
 
 import '../App.css';
 import { Header } from '../kit-components/Header';
-import { ArticleContainer, Container } from '../styles';
+import { ArticleContainer, Container, Form, SearchField } from '../styles';
 import { ArticleCard } from '../kit-components/ArticleCard';
 import { useHistory, useLocation } from 'react-router';
 
@@ -13,9 +13,7 @@ import { useHistory, useLocation } from 'react-router';
 
 const ArticlesPage: React.FC = () => {
   const [articles, setArticles] = React.useState<ArticleProps[]>([]);
-  const [searchText, setSearchText] = React.useState<string>('');
 
-  const { push: navigateTo } = useHistory();
   const location = useLocation();
   
   React.useEffect(() => {
@@ -42,26 +40,10 @@ const ArticlesPage: React.FC = () => {
       .catch(console.error);
   }, [location.search]);
 
-  const onChangeSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
-  }
-
-  const onClickSearch = (e:any) => {
-    e.preventDefault();
-    searchText && navigateTo({
-      pathname: '/',
-      search: `?search=${searchText}`,
-    });
-  }
-
   return (
     <div className="App">
       <Container>
         <Header />
-        <form onSubmit={onClickSearch}>
-          <input value={searchText} onChange={onChangeSearchText} placeholder='Search for article'/>
-          <button onClick={onClickSearch}>search</button>
-        </form>
         <ArticleContainer>
           {articles ? 
             articles.map((article, index) =>

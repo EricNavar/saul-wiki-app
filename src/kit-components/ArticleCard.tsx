@@ -13,7 +13,7 @@ export const ArticleCard: React.FC<ArticleProps> = (props) => {
             <div style={{ textAlign: 'center' }}>
                 <StyledImage src={props.thumbnail.fields.file.url} />
             </div>
-            <p>{props.description}</p>
+            <p style={{textDecoration:'none', color:'black', display: 'inline-flex'}}>{props.description}</p>
         </StyledArticle>
     );
 };

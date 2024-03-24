@@ -4,7 +4,7 @@ import {documentToHtmlString} from '@contentful/rich-text-html-renderer';
 
 import { Header } from '../kit-components/Header';
 import { ArticleProps } from '../articleTypes';
-import { ArticleTitle, Container, TextWrapper, StyledImage } from '../styles';
+import { ArticleTitle, Container, TextWrapper, StyledImage, ContentWrapper, Tag } from '../styles';
 import { client } from '../client';
 
 export const ArticleDetailsPage: React.FC<{ id: string }> = (props) => {
@@ -13,7 +13,11 @@ export const ArticleDetailsPage: React.FC<{ id: string }> = (props) => {
   React.useEffect(() => {
     client.getEntry(props.id)
       .then((response) => {
-        setArticle(response.fields as ArticleProps);
+        setArticle({
+          ...response.fields,
+          id: response.sys.id,
+          tag: response.metadata.tags[0].sys.id,
+        } as ArticleProps);
       })
       .catch(console.error);
   }, [props.id]);
@@ -26,15 +30,14 @@ export const ArticleDetailsPage: React.FC<{ id: string }> = (props) => {
   return (
     <Container>
       <Header />
-      <TextWrapper>
+      <ContentWrapper>
         <ArticleTitle>{article.title}</ArticleTitle>
-      </TextWrapper>
-      <div style={{ textAlign: 'center' }}>
-        <StyledImage src={article.thumbnail.fields.file.url} />
-      </div>
-      <TextWrapper>
+        <Tag>{article.tag}</Tag>
+        <div style={{ textAlign: 'center' }}>
+          <StyledImage src={article.thumbnail.fields.file.url} />
+        </div>
         <div dangerouslySetInnerHTML={{ __html: postContent }}></div>
-      </TextWrapper>
+      </ContentWrapper>
     </Container>
   );
 };

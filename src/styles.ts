@@ -23,7 +23,7 @@ export const ArticleContainer = styled.div`
 
 export const StyledArticle = styled(Link)`
     border-radius: 8px;
-    background-color: rgba(255,255,255,.85);
+    background-color: rgba(255,255,255);
     padding: 30px;
     margin: 20px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
@@ -69,14 +69,45 @@ export const TextWrapper = styled.div`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 `;
 
+export const ContentWrapper = styled.div`
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin: 24px;
+  padding: 32px;
+`;
+
 export const TagsContainer = styled.div`
   float: right;
 `;
 
-export const Tag = styled.button`
+export const TagButton = styled.button`
   background-color: #ccc;
   border-radius: 4px;
   color: black;
   text-decoration: none;
   padding: 3px;
+  border-style: none;
+  cursor: pointer;
+`;
+
+export const Tag = styled.span`
+  background-color: #ccc;
+  border-radius: 4px;
+  color: black;
+  padding: 3px;
+`;
+
+export const Form = styled.form`
+  position: sticky;
+  top: 100px;
+  flex-grow:1;
+`;
+
+export const SearchField = styled.input`
+
+`;
+
+export const NavigationContainer = styled.div`
+  display: flex;
 `;
