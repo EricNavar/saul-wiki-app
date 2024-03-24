@@ -1,12 +1,14 @@
 export type ArticleProps = {
-    id: string;
-    subText: string;
-    headerText: string;
-    image: {
-      fields: {
-          file: {
-              url: string;
-          }
+  id: string;
+  description: string;
+  content: any;
+  title: string;
+  thumbnail: {
+    fields: {
+      file: {
+        url: string;
       }
     }
+  },
+  tag: string,
 }

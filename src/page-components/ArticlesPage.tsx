@@ -7,7 +7,7 @@ import '../App.css';
 import { Header } from '../kit-components/Header';
 import { ArticleContainer, Container } from '../styles';
 import { ArticleCard } from '../kit-components/ArticleCard';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 
 // i hate my life
 
@@ -15,8 +15,8 @@ const ArticlesPage: React.FC = () => {
   const [articles, setArticles] = React.useState<ArticleProps[]>([]);
   const [searchText, setSearchText] = React.useState<string>('');
 
-  const { push: navigateTo, location } = useHistory();
-  // console.log(searchParams);
+  const { push: navigateTo } = useHistory();
+  const location = useLocation();
   
   React.useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -24,15 +24,20 @@ const ArticlesPage: React.FC = () => {
     const search = searchParams.get('search')
 
     client.getEntries({
-      content_type: 'project',
+      content_type: 'article',
       'metadata.tags.sys.id[in]': tag ? [tag] : undefined,
       query: search ? search : undefined,
     })
       .then((response) => {
         const articlesFromContentful = response.items.map(item => {
-          return {...item.fields, id: item.sys.id} as ArticleProps
+          return {
+            ...item.fields,
+            id: item.sys.id,
+            tag: item.metadata.tags[0].sys.id,
+          } as ArticleProps
         });
-        setArticles(articlesFromContentful);
+        const sortedArticles = articlesFromContentful.sort((elem1, elem2) => elem1.tag.localeCompare(elem2.tag));
+        setArticles(sortedArticles);
       })
       .catch(console.error);
   }, [location.search]);

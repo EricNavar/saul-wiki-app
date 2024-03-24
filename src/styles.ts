@@ -73,7 +73,7 @@ export const TagsContainer = styled.div`
   float: right;
 `;
 
-export const Tag = styled(Link)`
+export const Tag = styled.button`
   background-color: #ccc;
   border-radius: 4px;
   color: black;

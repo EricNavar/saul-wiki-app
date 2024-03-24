@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { marked } from 'marked';
+import {documentToHtmlString} from '@contentful/rich-text-html-renderer';
 
 import { Header } from '../kit-components/Header';
 import { ArticleProps } from '../articleTypes';
@@ -21,19 +21,19 @@ export const ArticleDetailsPage: React.FC<{ id: string }> = (props) => {
   if (!article) {
     return <div>Loading...</div>;
   }
-  const postDescription = marked.parse(article.subText) as string;
+  const postContent = documentToHtmlString(article.content);
 
   return (
     <Container>
       <Header />
       <TextWrapper>
-        <ArticleTitle>{article.headerText}</ArticleTitle>
+        <ArticleTitle>{article.title}</ArticleTitle>
       </TextWrapper>
       <div style={{ textAlign: 'center' }}>
-        <StyledImage src={article.image.fields.file.url} />
+        <StyledImage src={article.thumbnail.fields.file.url} />
       </div>
       <TextWrapper>
-      <div dangerouslySetInnerHTML={{ __html: postDescription }}></div>
+        <div dangerouslySetInnerHTML={{ __html: postContent }}></div>
       </TextWrapper>
     </Container>
   );
