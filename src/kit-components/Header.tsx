@@ -1,7 +1,19 @@
 import React from 'react';
-import { Form, HeaderInner, HeaderTitle, NavigationContainer, SearchField, StyledHeader,  TagButton, TagsContainer } from '../styles';
+import { Form, HeaderInner, HeaderTitle, NavigationContainer, SearchField, StyledHeader, TagButton, TagsContainer } from '../styles';
 import { useHistory } from 'react-router';
-import Logo from '../Better_Call_Saul_logo.png'
+import Logo from '../assets/Better_Call_Saul_logo.png'
+
+type Tag = {
+  text: string;
+  link: string;
+}
+
+const tags: Tag[] = [
+  { text: 'Seasons', link: 'season' },
+  { text: 'Characters', link: 'character' },
+  { text: 'Locations', link: 'location' },
+  { text: 'Lore', link: 'lore' },
+]
 
 export const Header: React.FC = () => {
   const [searchText, setSearchText] = React.useState<string>('');
@@ -12,7 +24,7 @@ export const Header: React.FC = () => {
     setSearchText(e.target.value);
   }
 
-  const onClickSearch = (e:any) => {
+  const onClickSearch = (e: any) => {
     e.preventDefault();
     searchText && history.push({
       pathname: '/',
@@ -24,43 +36,25 @@ export const Header: React.FC = () => {
     <StyledHeader >
       <HeaderInner>
         <HeaderTitle to='/'>
-          <img src={Logo} alt='logo' height="80px"/>
+          <img src={Logo} alt='logo' height="80px" />
         </HeaderTitle>
         <NavigationContainer>
           <Form onSubmit={onClickSearch}>
-            <SearchField value={searchText} onChange={onChangeSearchText} placeholder='Search for article'/>
+            <SearchField value={searchText} onChange={onChangeSearchText} placeholder='Search for article' />
             <button onClick={onClickSearch}>search</button>
           </Form>
           <TagsContainer>
             Tags:
-            <TagButton onClick={()=>history.push({
-              pathname: '/',
-              search: '?tag=season',
-            })}>
-              Seasons
-            </TagButton>
-            &nbsp;
-            <TagButton onClick={()=>history.push({
-              pathname: '/',
-              search: '?tag=character',
-            })}>
-              Characters
-            </TagButton>
-            &nbsp;
-            <TagButton onClick={()=>history.push({
-              pathname: '/',
-              search: '?tag=location',
-            })}>
-              Locations
-            </TagButton>
-            <TagButton onClick={()=>history.push({
-              pathname: '/',
-              search: '?tag=lore',
-            })}>
-              Lore
-            </TagButton>
+            {tags.map((tag, index) =>
+              <TagButton key={index} onClick={(link) => history.push({
+                pathname: '/',
+                search: `?tag=${tag.link}`,
+              })}>
+                {tag.text}
+              </TagButton>
+            )}
           </TagsContainer>
-          </NavigationContainer>
+        </NavigationContainer>
       </HeaderInner>
     </StyledHeader>
   );

@@ -93,6 +93,7 @@ export const TagButton = styled.button`
   padding: 3px;
   border-style: none;
   cursor: pointer;
+  margin-right:8px;
 `;
 
 export const Tag = styled.span`
